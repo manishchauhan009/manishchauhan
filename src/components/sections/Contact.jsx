@@ -45,22 +45,27 @@ const Contact = () => {
         }
 
         try {
-            // Map form data to database schema
-            const dbData = {
-                user_name: formData.full_name,
-                user_email: formData.email,
-                user_phone: formData.phone,
-                user_subject: formData.subject,
-                message: formData.message,
-            };
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user_name: formData.full_name,
+                    user_email: formData.email,
+                    user_phone: formData.phone,
+                    user_subject: formData.subject,
+                    message: formData.message,
+                }),
+            });
 
-            const { error } = await supabase.from("contacts").insert([dbData]);
-            if (error) throw error;
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.error || "Failed to send message");
+
             toast.success("Message sent successfully! I'll get back to you soon.");
             setFormData({ full_name: "", email: "", phone: "", subject: "", message: "" });
         } catch (error) {
             console.error("Error submitting form:", error);
-            toast.error("Something went wrong. Please try again.");
+            toast.error(error.message || "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
