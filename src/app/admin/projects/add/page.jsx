@@ -168,86 +168,87 @@ export default function AddProject() {
                             </div>
                         )}
                     </div>
+                </div>
 
-                    {/* Form Fields */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-400">Project Title</label>
-                            <input
-                                type="text"
-                                name="title"
-                                value={formData.title}
-                                onChange={handleChange}
-                                placeholder="E.g. E-Commerce Platform"
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-400">Tech Stack</label>
-                            <input
-                                type="text"
-                                name="tech_stack"
-                                value={formData.tech_stack}
-                                onChange={handleChange}
-                                placeholder="React, Node.js, Tailwind..."
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
-                            />
-                            <p className="text-xs text-gray-500">Comma separated values</p>
-                        </div>
-                    </div>
-
+                {/* Form Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-400">Description</label>
-                        <textarea
-                            name="description"
-                            value={formData.description}
+                        <label className="text-sm font-medium text-gray-400">Project Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            value={formData.title}
                             onChange={handleChange}
-                            rows="4"
-                            placeholder="Project detailed description..."
-                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all resize-none"
+                            placeholder="E.g. E-Commerce Platform"
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
                             required
                         />
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-400">GitHub Repository</label>
-                            <input
-                                type="url"
-                                name="github_link"
-                                value={formData.github_link}
-                                onChange={handleChange}
-                                placeholder="https://github.com/..."
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-400">Live Demo URL</label>
-                            <input
-                                type="url"
-                                name="live_link"
-                                value={formData.live_link}
-                                onChange={handleChange}
-                                placeholder="https://..."
-                                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
-                            />
-                        </div>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-400">Tech Stack</label>
+                        <input
+                            type="text"
+                            name="tech_stack"
+                            value={formData.tech_stack}
+                            onChange={handleChange}
+                            placeholder="React, Node.js, Tailwind..."
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
+                        />
+                        <p className="text-xs text-gray-500">Comma separated values</p>
                     </div>
+                </div>
 
-                    <div className="pt-4 flex justify-end">
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="flex items-center gap-2 px-8 py-3 rounded-xl bg-primary text-black font-bold hover:bg-secondary transition-colors disabled:opacity-50"
-                        >
-                            {loading ? "Saving..." : (
-                                <>
-                                    <Save className="w-5 h-5" /> Save Project
-                                </>
-                            )}
-                        </button>
+                <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-400">Description</label>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        rows="4"
+                        placeholder="Project detailed description..."
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all resize-none"
+                        required
+                    />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-400">GitHub Repository</label>
+                        <input
+                            type="url"
+                            name="github_link"
+                            value={formData.github_link}
+                            onChange={handleChange}
+                            placeholder="https://github.com/..."
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
+                        />
                     </div>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-400">Live Demo URL</label>
+                        <input
+                            type="url"
+                            name="live_link"
+                            value={formData.live_link}
+                            onChange={handleChange}
+                            placeholder="https://..."
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary focus:bg-white/10 outline-none transition-all"
+                        />
+                    </div>
+                </div>
+
+                <div className="pt-4 flex justify-end">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="flex items-center gap-2 px-8 py-3 rounded-xl bg-primary text-black font-bold hover:bg-secondary transition-colors disabled:opacity-50"
+                    >
+                        {loading ? "Saving..." : (
+                            <>
+                                <Save className="w-5 h-5" /> Save Project
+                            </>
+                        )}
+                    </button>
+                </div>
             </form>
         </div>
     );
