@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio Website - Manish Chauhan
 
-## Getting Started
+A high-performance, visually stunning portfolio website built with **Next.js**, **Supabase**, and **Tailwind CSS**. This project showcases my skills as a Full Stack Developer, featuring a custom admin panel, dynamic content management, and premium UI animations.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[https://manishchauhan.online](https://manishchauhan.online)
+
+## ✨ Features
+
+- **Premium UI/UX**: Glassmorphism, 3D Tilt effects, and smooth layout transitions using `framer-motion`.
+- **Admin Dashboard**: Secure admin panel to manage Projects, Blogs, and Resume updates.
+- **Dynamic Content**:
+  - **Projects**: Add/Edit/Delete projects with rich details and external links.
+  - **Blogs**: Full Markdown/Rich Text editing, "Like" & "View" counters, and Comment system.
+  - **Resume Manager**: Update your CV link or upload a PDF directly from the dashboard.
+- **Interactive Elements**:
+  - **Contact Form**: Real-time submission to Supabase.
+  - **Skills Grid**: Categorized tech stack with hover effects.
+  - **Experience Timeline**: Vertical timeline for professional history.
+- **SEO Optimized**: Fully optimized metadata, OpenGraph tags, and semantic HTML for high discoverability.
+
+## 🛠️ Tech Stack
+
+- **Frontend**: [Next.js 14](https://nextjs.org/) (App Router), [React](https://reactjs.org/), [Tailwind CSS](https://tailwindcss.com/)
+- **Backend / Database**: [Supabase](https://supabase.com/) (PostgreSQL, Auth, Storage)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/), [React Parallax Tilt](https://www.npmjs.com/package/react-parallax-tilt), [TSParticles](https://particles.js.org/)
+- **Icons**: [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/)
+- **Forms**: React Hot Toast for notifications.
+
+## 📂 Folder Structure
+
+```
+src/
+├── app/                  # Next.js App Router pages
+│   ├── admin/            # Admin Panel routes (Login, Dashboard, CMS)
+│   ├── blogs/            # Public Blog pages
+│   ├── projects/         # Public Project pages
+│   └── ...
+├── components/           # Reusable Components
+│   ├── layout/           # Header, Footer, Transitions
+│   ├── sections/         # Homepage Sections (Hero, About, Skills, etc.)
+│   ├── ui/               # Core UI elements (Buttons, Inputs, Editors)
+│   └── features/         # Feature-specific components (Blog Likes, Comments)
+├── lib/                  # Utilities (Supabase Client, Helpers)
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Clone the repository**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    git clone https://github.com/manishchauhan009/manishchauhan.git
+    cd manishchauhan
+    ```
 
-## Learn More
+2. **Install dependencies**:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up Environment Variables**:
+    Create a `.env.local` file in the root directory and add your Supabase credentials:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```env
+    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+    ```
 
-## Deploy on Vercel
+    *Note: You will need to set up the database schema provided in `supabase_schema.sql`.*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Run the development server**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## 🛡️ Database Setup
+
+Run the SQL commands found in `supabase_schema.sql` inside your Supabase SQL Editor to verify tables for `blogs`, `projects`, `contacts`, `resumes`, and `comments` are created with correct RLS policies.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
