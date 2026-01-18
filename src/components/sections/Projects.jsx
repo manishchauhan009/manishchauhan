@@ -48,35 +48,7 @@ const getTechIcon = (techName) => {
     return icons[tech] || { icon: Code2, color: '#9CA3AF' };
 };
 
-const MOCK_PROJECTS = [
-    {
-        id: "mock-1",
-        title: "E-Commerce Ultra",
-        description: "A high-performance modern e-commerce platform with real-time inventory and AI-driven recommendations.",
-        tech_stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Stripe"],
-        image_url: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
-        live_link: "#",
-        github_link: "#"
-    },
-    {
-        id: "mock-2",
-        title: "AI Analytics Dashboard",
-        description: "Real-time data visualization dashboard processing large datasets with machine learning integration.",
-        tech_stack: ["React", "Python", "Docker", "PostgreSQL", "D3.js"],
-        image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-        live_link: "#",
-        github_link: "#"
-    },
-    {
-        id: "mock-3",
-        title: "Social Connect App",
-        description: "A fully featured social media application with real-time messaging, stories, and feed algorithms.",
-        tech_stack: ["Node.js", "Express", "MongoDB", "Socket.io", "React"],
-        image_url: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-        live_link: "#",
-        github_link: "#"
-    }
-];
+
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -91,19 +63,17 @@ const Projects = () => {
                     .select("*")
                     .order("created_at", { ascending: false });
 
-                // If real projects exist, use them. Otherwise (or if very few), combine with mock for showcase.
+                // Map Supabase data to component format
                 const formattedProjects = (data || []).map(p => ({
                     ...p,
-                    live_link: p.link, // Map 'link' column to 'live_link'
-                    tech_stack: p.category ? p.category.split(',').map(t => t.trim()) : [], // Map 'category' to 'tech_stack' array
+                    live_link: p.link,
+                    tech_stack: p.category ? p.category.split(',').map(t => t.trim()) : [],
                 }));
 
-                const finalProjects = formattedProjects.length > 0 ? formattedProjects : MOCK_PROJECTS;
-
-                setProjects(finalProjects);
+                setProjects(formattedProjects);
             } catch (error) {
                 console.error("Error fetching projects:", error);
-                setProjects(MOCK_PROJECTS); // Fallback
+                setProjects([]);
             } finally {
                 setLoading(false);
             }
@@ -149,95 +119,110 @@ const Projects = () => {
                 </motion.div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-                    {projects.map((project, index) => (
-                        <Tilt
-                            key={project.id}
-                            tiltMaxAngleX={5}
-                            tiltMaxAngleY={5}
-                            scale={1.02}
-                            transitionSpeed={2000}
-                            className="h-full"
-                        >
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group relative h-full flex flex-col rounded-2xl bg-[#131a2a]/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-primary/50 transition-colors duration-500"
-                                onMouseEnter={() => setHoveredProject(project.id)}
-                                onMouseLeave={() => setHoveredProject(null)}
+                {/* Projects Grid */}
+                {projects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                        {projects.map((project, index) => (
+                            <Tilt
+                                key={project.id}
+                                tiltMaxAngleX={5}
+                                tiltMaxAngleY={5}
+                                scale={1.02}
+                                transitionSpeed={2000}
+                                className="h-full"
                             >
-                                {/* Image Container with Overlay */}
-                                <div className="relative h-56 md:h-64 overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#131a2a] via-transparent to-transparent z-10 opacity-60"></div>
-                                    <img
-                                        src={project.image_url || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"}
-                                        alt={project.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                            e.target.parentElement.style.background = 'linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(167, 139, 250, 0.1))';
-                                        }}
-                                    />
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    className="group relative h-full flex flex-col rounded-2xl bg-[#131a2a]/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-primary/50 transition-colors duration-500"
+                                    onMouseEnter={() => setHoveredProject(project.id)}
+                                    onMouseLeave={() => setHoveredProject(null)}
+                                >
+                                    {/* Image Container with Overlay */}
+                                    <div className="relative h-56 md:h-64 overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#131a2a] via-transparent to-transparent z-10 opacity-60"></div>
+                                        <img
+                                            src={project.image_url || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                                e.target.parentElement.style.background = 'linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(167, 139, 250, 0.1))';
+                                            }}
+                                        />
 
-                                    {/* Tech Icons Overlay on Image */}
-                                    <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap gap-2">
-                                        {project.tech_stack?.slice(0, 4).map((tech, i) => {
-                                            const { icon: Icon, color } = getTechIcon(tech);
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className="p-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 shadow-lg"
-                                                    title={tech}
-                                                >
-                                                    <Icon style={{ color }} className="w-4 h-4" />
+                                        {/* Tech Icons Overlay on Image */}
+                                        <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap gap-2">
+                                            {project.tech_stack?.slice(0, 4).map((tech, i) => {
+                                                const { icon: Icon, color } = getTechIcon(tech);
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        className="p-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 shadow-lg"
+                                                        title={tech}
+                                                    >
+                                                        <Icon style={{ color }} className="w-4 h-4" />
+                                                    </div>
+                                                );
+                                            })}
+                                            {(project.tech_stack?.length > 4) && (
+                                                <div className="p-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-xs text-white font-bold flex items-center justify-center w-7 h-7">
+                                                    +{project.tech_stack.length - 4}
                                                 </div>
-                                            );
-                                        })}
-                                        {(project.tech_stack?.length > 4) && (
-                                            <div className="p-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-xs text-white font-bold flex items-center justify-center w-7 h-7">
-                                                +{project.tech_stack.length - 4}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Content */}
-                                <div className="flex-1 p-6 sm:p-8 flex flex-col">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-primary group-hover:to-secondary transition-all duration-300">
-                                            {project.title}
-                                        </h3>
-
+                                            )}
+                                        </div>
                                     </div>
 
-                                    <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 group-hover:text-gray-300 transition-colors">
-                                        {project.description}
-                                    </p>
+                                    {/* Content */}
+                                    <div className="flex-1 p-6 sm:p-8 flex flex-col">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:from-primary group-hover:to-secondary transition-all duration-300">
+                                                {project.title}
+                                            </h3>
 
-                                    <div className="mt-auto">
-                                        {project.live_link ? (
-                                            <a
-                                                href={project.live_link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 duration-300"
-                                            >
-                                                Explore Project <ExternalLink className="w-4 h-4" />
-                                            </a>
-                                        ) : (
-                                            <span className="text-sm text-gray-500 italic">Coming Soon</span>
-                                        )}
+                                        </div>
+
+                                        <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 group-hover:text-gray-300 transition-colors">
+                                            {project.description}
+                                        </p>
+
+                                        <div className="mt-auto">
+                                            {project.live_link ? (
+                                                <a
+                                                    href={project.live_link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 duration-300"
+                                                >
+                                                    Explore Project <ExternalLink className="w-4 h-4" />
+                                                </a>
+                                            ) : (
+                                                <span className="text-sm text-gray-500 italic">Coming Soon</span>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
 
-                                {/* Hover Border Glow */}
-                                <div className="absolute inset-0 rounded-2xl border border-white/0 group-hover:border-primary/30 pointer-events-none transition-colors duration-500"></div>
-                            </motion.div>
-                        </Tilt>
-                    ))}
-                </div>
+                                    {/* Hover Border Glow */}
+                                    <div className="absolute inset-0 rounded-2xl border border-white/0 group-hover:border-primary/30 pointer-events-none transition-colors duration-500"></div>
+                                </motion.div>
+                            </Tilt>
+                        ))}
+                    </div> // projects map end
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center py-20 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                    >
+                        <Layers className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                        <h3 className="text-2xl font-bold text-white mb-2">Projects Coming Soon</h3>
+                        <p className="text-gray-400 max-w-md mx-auto">
+                            I'm currently polishing up my latest work. Check back soon for some exciting updates!
+                        </p>
+                    </motion.div>
+                )}
             </div>
         </section>
     );
