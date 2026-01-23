@@ -203,7 +203,7 @@ const Home = () => {
                         className="flex-shrink-0 relative"
                     >
                         <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.02} transitionSpeed={2000} className="relative z-10">
-                            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px] rounded-[2rem] overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 to-transparent shadow-2xl group">
+                            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 to-transparent shadow-2xl group">
                                 <div className="absolute inset-0 bg-[#0b0f1a]/40 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
                                 <img
                                     src="/images/profile.png"
@@ -220,8 +220,8 @@ const Home = () => {
                         </Tilt>
 
                         {/* Decorative Elements behind image */}
-                        <div className="absolute -top-10 -right-10 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
-                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/20 rounded-full blur-3xl"></div>
+                        <div className="absolute -top-4 -right-4 w-full h-full rounded-full border border-primary/20 animate-[spin_10s_linear_infinite]"></div>
+                        <div className="absolute -bottom-4 -left-4 w-full h-full rounded-full border border-secondary/20 animate-[spin_15s_linear_infinite_reverse]"></div>
                     </motion.div>
                 </div>
 
