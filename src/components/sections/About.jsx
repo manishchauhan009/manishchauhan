@@ -44,15 +44,15 @@ const About = () => {
                             </div>
 
                             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                                SDE I at <span className="text-gradient">Quinite Technologies</span> | MERN & Next.js Specialist
+                                Crafting <span className="text-gradient">Scalable & Modern</span> Web Experiences
                             </h2>
 
                             <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                                I'm <strong className="text-white">Manish Chauhan</strong>, a Web Developer specializing in scalable, high-performance applications using the MERN stack and Next.js.
+                                I'm <strong className="text-white">Manish Chauhan</strong>, a passionate <strong>Full Stack Developer</strong> dedicated to building high-performance, user-centric applications using the MERN stack and Next.js.
                             </p>
 
                             <p className="text-gray-400 text-lg leading-relaxed">
-                                Currently working on <strong>AI Voice Agents for Sales</strong>. I bridge the gap between creative design and robust engineering, with a strong focus on REST APIs, Agile workflows, and production-ready solutions.
+                                I bridge the gap between creative design and robust engineering, specializing in <strong>REST APIs, Database Design,</strong> and creating seamless digital solutions that drive business growth.
                             </p>
                         </div>
                     </div>
