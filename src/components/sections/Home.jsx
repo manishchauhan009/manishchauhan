@@ -202,28 +202,36 @@ const Home = () => {
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                         className="flex-shrink-0 relative"
                     >
-                        <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.02} transitionSpeed={2000} className="relative z-10">
-                            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 to-transparent shadow-2xl group">
-                                <div className="absolute inset-0 bg-[#0b0f1a]/40 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                                <img
-                                    src="/images/profile.png"
-                                    alt="Manish Chauhan"
-                                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.parentElement.style.background = '#1a2036';
-                                    }}
-                                />
-                                {/* Clean Overlay */}
-                                <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0b0f1a] to-transparent z-20 pointer-events-none"></div>
+                        <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} scale={1.05} transitionSpeed={2500}>
+                            <div className="relative w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] lg:w-[440px] lg:h-[440px] flex items-center justify-center">
+                                {/* Animated Borders (The Glow Rings) - Outer */}
+                                <div className="absolute inset-0 rounded-full border border-primary/30 animate-[spin_10s_linear_infinite]"></div>
+                                {/* Inner Ring */}
+                                <div className="absolute inset-4 rounded-full border border-secondary/30 animate-[spin_15s_linear_infinite_reverse]"></div>
+                                {/* Glow Effect */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/20 blur-[60px] animate-pulse"></div>
+
+                                {/* Main Image Container - Nested inside the rings */}
+                                <div className="absolute inset-8 rounded-full overflow-hidden border-2 border-white/10 bg-[#131a2a]/50 backdrop-blur-sm shadow-2xl z-10">
+                                    <img
+                                        src="/images/profile.png"
+                                        alt="Manish Chauhan"
+                                        className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.parentElement.style.background = 'linear-gradient(135deg, #0b0f1a, #1a2036)';
+                                        }}
+                                    />
+
+                                    {/* Glass Overlay Name Tag */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-6">
+                                        <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white shadow-lg">
+                                            Manish Chauhan
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </Tilt>
-
-                        {/* Decorative Elements behind image */}
-                        <div className="absolute -top-4 -right-4 w-full h-full rounded-full border border-primary/20 animate-[spin_10s_linear_infinite]"></div>
-                        <div className="absolute -bottom-4 -left-4 w-full h-full rounded-full border border-secondary/20 animate-[spin_15s_linear_infinite_reverse]"></div>
-                        {/* Restored Glow Effect */}
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/20 blur-[60px] animate-pulse z-0"></div>
                     </motion.div>
                 </div>
 
