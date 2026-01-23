@@ -222,6 +222,8 @@ const Home = () => {
                         {/* Decorative Elements behind image */}
                         <div className="absolute -top-4 -right-4 w-full h-full rounded-full border border-primary/20 animate-[spin_10s_linear_infinite]"></div>
                         <div className="absolute -bottom-4 -left-4 w-full h-full rounded-full border border-secondary/20 animate-[spin_15s_linear_infinite_reverse]"></div>
+                        {/* Restored Glow Effect */}
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/20 blur-[60px] animate-pulse z-0"></div>
                     </motion.div>
                 </div>
 
