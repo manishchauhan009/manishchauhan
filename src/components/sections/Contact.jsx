@@ -1,6 +1,5 @@
 "use client";
 
-import { SupabaseClient } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from "lucide-react";
 import { useState } from "react";

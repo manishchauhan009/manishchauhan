@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import Typed from "typed.js";
-import { ArrowRight, Download, MousePointer2 } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { ArrowRight, Download, MousePointer2, Github, Linkedin, Instagram } from "lucide-react";
 import Tilt from "react-parallax-tilt";
 import { supabase } from "../../lib/supabaseClient";
 
@@ -62,7 +61,7 @@ const Home = () => {
     }, []);
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-[#0b0f1a] pt-36 lg:pt-44 pb-20"> {/* Removed flex-center, added explicit padding */}
+        <section className="relative min-h-screen overflow-hidden bg-[#0b0f1a] pt-36 lg:pt-32 pb-20"> {/* Removed flex-center, added explicit padding */}
             {/* Particles Background */}
             {init && (
                 <Particles
@@ -188,9 +187,9 @@ const Home = () => {
                             transition={{ delay: 0.7 }}
                             className="flex items-center gap-6 pt-6 opacity-80"
                         >
-                            <a href="https://github.com/manishchauhan009" target="_blank" className="hover:text-primary transition-colors"><FaGithub size={22} /></a>
-                            <a href="https://linkedin.com/in/manishchauhan0054" target="_blank" className="hover:text-primary transition-colors"><FaLinkedin size={22} /></a>
-                            <a href="https://instagram.com/__manish__chauhan" target="_blank" className="hover:text-primary transition-colors"><FaInstagram size={22} /></a>
+                            <a href="https://github.com/manishchauhan009" target="_blank" className="hover:text-primary transition-colors"><Github size={22} /></a>
+                            <a href="https://linkedin.com/in/manishchauhan0054" target="_blank" className="hover:text-primary transition-colors"><Linkedin size={22} /></a>
+                            <a href="https://instagram.com/__manish__chauhan" target="_blank" className="hover:text-primary transition-colors"><Instagram size={22} /></a>
                         </motion.div>
 
                     </motion.div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
-import { ExternalLink, Github, Layers, Search, Code2 } from "lucide-react";
+import { ExternalLink, Github, Layers, Code2 } from "lucide-react";
 import {
     SiReact, SiNextdotjs, SiTailwindcss, SiNodedotjs, SiMongodb,
     SiSupabase, SiFramer, SiTypescript, SiJavascript, SiHtml5,

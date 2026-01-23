@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Eye, ArrowRight, BookOpen } from "lucide-react";
+import { Calendar, Eye, ArrowRight, BookOpen } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import Link from "next/link";
 
