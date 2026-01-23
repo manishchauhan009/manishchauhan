@@ -34,14 +34,16 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- 5. Open RLS Policies for Comments (Adjust as needed for security)
+-- 5. Open RLS Policies for Comments
 ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.comments;
 CREATE POLICY "Enable read access for all users" ON public.comments
 AS PERMISSIVE FOR SELECT
 TO public
 USING (true);
 
+DROP POLICY IF EXISTS "Enable insert access for all users" ON public.comments;
 CREATE POLICY "Enable insert access for all users" ON public.comments
 AS PERMISSIVE FOR INSERT
 TO public
@@ -58,18 +60,58 @@ CREATE TABLE IF NOT EXISTS public.resumes (
 -- 7. Policies for resumes
 ALTER TABLE public.resumes ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.resumes;
 CREATE POLICY "Enable read access for all users" ON public.resumes
 AS PERMISSIVE FOR SELECT
 TO public
 USING (true);
 
+DROP POLICY IF EXISTS "Enable update for authenticated users only" ON public.resumes;
 CREATE POLICY "Enable update for authenticated users only" ON public.resumes
 AS PERMISSIVE FOR UPDATE
 TO authenticated
 USING (true)
 WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Enable insert for authenticated users only" ON public.resumes;
 CREATE POLICY "Enable insert for authenticated users only" ON public.resumes
 AS PERMISSIVE FOR INSERT
 TO authenticated
 WITH CHECK (true);
+
+-- 8. STORAGE: Create 'portfolio' bucket
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('portfolio', 'portfolio', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- 9. STORAGE: Setup Policies
+-- Ensure RLS is enabled on objects (Usually already enabled, skipping ALTER to avoid permission errors)
+-- ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access to 'portfolio' bucket
+DROP POLICY IF EXISTS "Public Access" ON storage.objects;
+CREATE POLICY "Public Access" ON storage.objects
+FOR SELECT
+TO public
+USING (bucket_id = 'portfolio');
+
+-- Allow authenticated users to upload to 'portfolio' bucket
+DROP POLICY IF EXISTS "Authenticated Insert" ON storage.objects;
+CREATE POLICY "Authenticated Insert" ON storage.objects
+FOR INSERT
+TO authenticated
+WITH CHECK (bucket_id = 'portfolio');
+
+-- Allow authenticated users to update their own objects
+DROP POLICY IF EXISTS "Authenticated Update" ON storage.objects;
+CREATE POLICY "Authenticated Update" ON storage.objects
+FOR UPDATE
+TO authenticated
+USING (bucket_id = 'portfolio');
+
+-- Allow authenticated users to delete from 'portfolio' bucket
+DROP POLICY IF EXISTS "Authenticated Delete" ON storage.objects;
+CREATE POLICY "Authenticated Delete" ON storage.objects
+FOR DELETE
+TO authenticated
+USING (bucket_id = 'portfolio');

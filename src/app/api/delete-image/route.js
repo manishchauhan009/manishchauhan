@@ -1,24 +1,30 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { createClient } from '@supabase/supabase-js';
 
-cloudinary.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY;
+
+// Create a Supabase client with the SERVICE KEY for admin rights
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function POST(request) {
     try {
         const { public_id } = await request.json();
 
         if (!public_id) {
-            return Response.json({ error: "public_id is required" }, { status: 400 });
+            return Response.json({ error: "public_id (file path) is required" }, { status: 400 });
         }
 
-        const result = await cloudinary.uploader.destroy(public_id);
+        // Delete from Supabase Storage
+        const { data, error } = await supabase
+            .storage
+            .from('portfolio')
+            .remove([public_id]);
 
-        console.log("Cloudinary delete result:", result);
+        if (error) {
+            throw error;
+        }
 
-        return Response.json({ success: true, result });
+        return Response.json({ success: true, data });
     } catch (error) {
         console.error("Delete image error:", error);
         return Response.json({ error: error.message }, { status: 500 });

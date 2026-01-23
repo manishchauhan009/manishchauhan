@@ -1,10 +1,10 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { createClient } from '@supabase/supabase-js';
 
-cloudinary.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY;
+
+// Create a Supabase client with the SERVICE KEY for admin rights (bypassing RLS)
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function POST(request) {
     try {
@@ -15,28 +15,35 @@ export async function POST(request) {
             return Response.json({ error: "No file provided" }, { status: 400 });
         }
 
-        // Convert file to buffer
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        // Upload to Cloudinary stream
-        const result = await new Promise((resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream(
-                {
-                    upload_preset: "portfolio_unsigned",
-                    folder: "portfolio_projects" // Optional: Keep organization if needed, or rely on preset
-                },
-                (error, result) => {
-                    if (error) reject(error);
-                    else resolve(result);
-                }
-            );
-            uploadStream.end(buffer);
-        });
+        // Generate a unique file name
+        const timestamp = Date.now();
+        const safeName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+        const fileName = `uploads/${timestamp}_${safeName}`;
+
+        const { data, error } = await supabase
+            .storage
+            .from('portfolio')
+            .upload(fileName, buffer, {
+                contentType: file.type,
+                upsert: false
+            });
+
+        if (error) {
+            throw error;
+        }
+
+        // Get Public URL
+        const { data: { publicUrl } } = supabase
+            .storage
+            .from('portfolio')
+            .getPublicUrl(fileName);
 
         return Response.json({
-            secure_url: result.secure_url,
-            public_id: result.public_id
+            secure_url: publicUrl,
+            public_id: fileName // Return path as public_id for deletion
         });
 
     } catch (error) {

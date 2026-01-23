@@ -45,8 +45,8 @@ const Header = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center group">
                         <span className="text-2xl lg:text-3xl font-bold tracking-tight">
-                            Chauhan{" "}
-                            <span className="text-gradient">Manish</span>
+                            Manish{" "}
+                            <span className="text-gradient">Chauhan</span>
                         </span>
                     </Link>
 

@@ -34,10 +34,13 @@ export default function BlogDetail() {
                 setBlog(data);
 
                 // Increment views
-                await supabase.rpc("increment_blog_views", { blog_id: data.id }).catch(async () => {
-                    // Fallback manual increment
+                // Increment views safely
+                const { error: viewError } = await supabase.rpc("increment_blog_views", { blog_id: data.id });
+
+                if (viewError) {
+                    console.warn("RPC increment failed, falling back to manual update:", viewError);
                     await supabase.from("blogs").update({ views: (data.views || 0) + 1 }).eq("id", data.id);
-                });
+                }
 
             } catch (error) {
                 console.error("Error fetching blog:", error);
