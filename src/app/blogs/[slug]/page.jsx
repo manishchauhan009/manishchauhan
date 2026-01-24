@@ -71,7 +71,7 @@ export default function BlogDetail() {
             <Header />
 
             {/* Hero Header */}
-            <div className="relative pt-32 pb-16 px-6 lg:px-12 overflow-hidden">
+            <div className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
                 </div>
@@ -96,7 +96,7 @@ export default function BlogDetail() {
                         </span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight break-words">
                         {blog.title}
                     </h1>
 
@@ -116,7 +116,7 @@ export default function BlogDetail() {
             </div>
 
             {/* Featured Image */}
-            <div className="max-w-5xl mx-auto px-6 mb-16">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-16">
                 <div className="aspect-[21/9] rounded-3xl overflow-hidden border border-white/10 relative group">
                     <img
                         src={blog.image_url || "/images/blog-placeholder.jpg"}
@@ -128,9 +128,9 @@ export default function BlogDetail() {
             </div>
 
             {/* Content */}
-            <article className="max-w-3xl mx-auto px-6 mb-20">
+            <article className="max-w-3xl mx-auto px-4 sm:px-6 mb-20">
                 <div
-                    className="prose prose-invert prose-lg max-w-none 
+                    className="prose prose-invert md:prose-lg max-w-none break-words 
                     prose-headings:text-white prose-p:text-gray-300 prose-strong:text-white 
                     prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                     prose-img:rounded-2xl prose-img:border prose-img:border-white/10
@@ -154,7 +154,7 @@ export default function BlogDetail() {
             </article>
 
             {/* Comments Section */}
-            <div className="max-w-3xl mx-auto px-6 pb-24">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-24">
                 <BlogComments blogId={blog.id} />
             </div>
 
