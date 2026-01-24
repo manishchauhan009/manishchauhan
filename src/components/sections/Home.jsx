@@ -47,10 +47,10 @@ const Home = () => {
     useEffect(() => {
         const typed = new Typed(typedElRef.current, {
             strings: [
-                "Build Web Apps",
-                "Learn New Tech",
-                "Create Modern UIs",
-                "Solve Problems",
+                "Robust Web Applications",
+                "Scalable Backend Systems",
+                "Modern User Interfaces",
+                "Digital Experiences",
             ],
             typeSpeed: 60,
             backSpeed: 40,
