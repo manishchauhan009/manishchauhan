@@ -53,9 +53,7 @@ export const metadata = {
             'max-snippet': -1,
         },
     },
-    icons: {
-        icon: '/favicon.ico',
-    },
+
 };
 
 export default function RootLayout({ children }) {
